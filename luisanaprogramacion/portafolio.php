@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/c1a6962e2d.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Miller</title>
     <link rel="stylesheet" href="style.css">   
     <link rel="icon" type="image/png" href="perro.png">
@@ -62,9 +64,9 @@
     <section class="cuadro" id="suhistoria">
         <h1 class="segundo" style="left: -600px;"> Historia </h1>  
 
-        <p class="otrotexto"style="margin-bottom: 10px">
-            Miller fue adoptado desde bebé por una de mis tias, ella lo tuvo por 3 años 
-            aproximadamente, luego de eso, 
+        <p class="otrotexto" style="margin-bottom: 10px">
+            Miller fue adoptado desde bebé por una de mis tias, ella lo tuvo por 3 años aproximadamente, luego de eso
+             
         </p>
         <p class="otrotexto"style="margin-bottom: 10px">
             en vista de todo lo que estaba ocurriendo en el país, 
@@ -134,16 +136,93 @@
 
     </section>
 
-    <footer class="fuente">
+   
+   <h1 style="margin-top: -100px; margin-left: 600px;">Comentarios</h1>
+<section style="margin-top: 120px;" class="fuente">
+  <div class="container">
+    <form method="POST">
+    <?php
+    include "conn.php";
+    include "controller/new_user.php"
+    ?>
 
-        <ul style="margin-left: 470px;">
 
-            
-            <li><a href=""> <span style='font-size:25px;'>&#128062;</span> </a></li>
-            <li><a href="https://www.purina.es/encuentra-mascota/razas-de-perro/yorkshire-terrier">Más sobre los Yorkies</a></li>
-            <li><a href="https://t.me/Wisana1">Contacto</a></li>
-    </ul>
-    </footer>
-</form>
+
+
+
+
+    <div class="row">
+      <div class="col-md-4" style="padding: 20px; background-color: #f0f0f0;">
+        <div class="formulario">
+          <label for="">Nombre y apellido</label>
+          <input name="nombreyapellido" type="text" placeholder="Nombre completo" class="form-control" style="margin-bottom: 20px;>
+        </div>
+        <div class="formulario">
+          <label for="">Usuario</label>
+          <input name="usuario" type="text" placeholder="Ingresa tu usuario" class="form-control" style="margin-bottom: 20px;">
+        </div>
+        <div class="formulario">
+          <label for="">Correo</label>
+          <input name="email" type="email" placeholder="Ingresa tu correo" class="form-control" style="margin-bottom: 20px;">
+        </div>
+        <div class="formulario">
+          <label for="">Comentarios</label>
+          <textarea name="nota" placeholder="Agrega tu comentario" class="form-control" style="margin-bottom: 20px;"></textarea>
+        </div>
+        <button name="enviar" type="submit" class="btn btn-primary w-100" value="ok">Enviar</button>
+      </div>
+      </form>
+      <div class="col-md-8"></div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-12" style="padding: 20px; overflow-y: auto;">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Comentario</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          
+          <?php
+          include "conn.php";
+          $sql = $conn->query("select * from portafolio");
+          while ($datos = $sql->fetch_object()){?>
+
+
+
+            <tr>
+              <th><?=$datos->id?></th>
+              <td><?=$datos->nombreyapellido ?></th>
+              <td><?=$datos->usuario ?></th>
+              <td><?=$datos->email ?></th>
+              <td><?=$datos->nota?></th>
+
+              <td>
+                <a href="" class="btn btn-small btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="" class="btn btn-small btn-secondary"><i class="fa-solid fa-trash"></i></a>
+              </td>
+            </tr>
+          <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fuente">
+  <ul style="margin-left: 470px;">
+    <li><a href=""> <span style='font-size:25px;'>&#128062;</span> </a></li>
+    <li><a href="https://www.purina.es/encuentra-mascota/razas-de-perro/yorkshire-terrier">Más sobre los Yorkies</a></li>
+    <li><a href="https://t.me/Wisana1">Contacto</a></li>
+  </ul>
+</footer>
 </body>
 </html>
